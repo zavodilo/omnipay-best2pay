@@ -157,6 +157,11 @@ abstract class AbstractRequest extends BaseAbstractRequest
             http_build_query($data, '', '&')
         );
 
+        // 200 ok is ok status in best2pay response
+        if ($httpResponse->getStatusCode() !== 200) {
+            throw new \RuntimeException('invalid response status');
+        }
+
         $responseClassName = str_replace('Request', 'Response', \get_class($this));
         $reflection = new \ReflectionClass($responseClassName);
         if (!$reflection->isInstantiable()) {

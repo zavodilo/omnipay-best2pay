@@ -189,4 +189,12 @@ class PurchaseRequestTest extends AbstractRequestTest
         $this->assertEquals($response->getMessage(),
             'Ошибка: неправильный код валюты. Пожалуйста, обратитесь в свой Интернет-магазин.');
     }
+
+    public function testInvalidStatus(): void
+    {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('invalid response status');
+        $this->setMockHttpResponse('InvalidHttpStatusResponse.txt');
+        $response = $this->request->send();
+    }
 }
