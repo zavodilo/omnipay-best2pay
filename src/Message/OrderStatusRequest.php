@@ -8,44 +8,44 @@ namespace Omnipay\Best2Pay\Message;
  */
 class OrderStatusRequest extends AbstractRequest
 {
-		/**
-		 * @inheritdoc
-		 */
-		public function getAction(): string
-		{
-				return 'Order';
-		}
+    /**
+     * @inheritdoc
+     */
+    public function getAction(): string
+    {
+        return 'Order';
+    }
 
-		/**
-		 * @return int
-		 */
-		public function getId(): int
-		{
-				return $this->getParameter('id');
-		}
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->getParameter('id');
+    }
 
-		/**
-		 * @param $value
-		 * @return $this
-		 */
-		public function setId(int $value): self
-		{
-				return $this->setParameter('id', $value);
-		}
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function setId(int $value): self
+    {
+        return $this->setParameter('id', $value);
+    }
 
-		/**
-		 * @inheritdoc
-		 */
-		public function getData()
-		{
-				$this->validate('sector', 'id', 'password');
-				$signatureString = $this->getSector() . $this->getId() . $this->getPassword();
-				$signature = $this->buildSignature($signatureString);
+    /**
+     * @inheritdoc
+     */
+    public function getData()
+    {
+        $this->validate('sector', 'id', 'password');
+        $signatureString = $this->getSector() . $this->getId() . $this->getPassword();
+        $signature = $this->buildSignature($signatureString);
 
-				return [
-						'id' => $this->getId(),
-						'sector' => $this->getSector(),
-						'signature' => $signature,
-				];
-		}
+        return [
+            'id' => $this->getId(),
+            'sector' => $this->getSector(),
+            'signature' => $signature,
+        ];
+    }
 }

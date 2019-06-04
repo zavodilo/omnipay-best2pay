@@ -11,38 +11,38 @@ use Omnipay\Common\Message\RequestInterface;
  */
 class Response extends AbstractResponse
 {
-		/**
-		 * {@inheritdoc}
-		 */
-		public function __construct(RequestInterface $request, $data)
-		{
-				$xmlData = simplexml_load_string($data);
-				$jsonData = json_encode($xmlData);
+    /**
+     * {@inheritdoc}
+     */
+    public function __construct(RequestInterface $request, $data)
+    {
+        $xmlData = simplexml_load_string($data);
+        $jsonData = json_encode($xmlData);
 
-				parent::__construct($request, json_decode($jsonData, true));
-		}
+        parent::__construct($request, json_decode($jsonData, true));
+    }
 
-		/**
-		 * {@inheritdoc}
-		 */
-		public function getMessage(): ?string
-		{
-				return (!$this->isSuccessful() && $this->data['description']) ? $this->data['description']: null;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessage(): ?string
+    {
+        return (!$this->isSuccessful() && $this->data['description']) ? $this->data['description'] : null;
+    }
 
-		/**
-		 * {@inheritdoc}
-		 */
-		public function getCode(): ?int
-		{
-				return $this->data['code'] ?? null;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode(): ?int
+    {
+        return $this->data['code'] ?? null;
+    }
 
-		/**
-		 * {@inheritdoc}
-		 */
-		public function isSuccessful(): bool
-		{
-				return $this->getCode() === null;
-		}
+    /**
+     * {@inheritdoc}
+     */
+    public function isSuccessful(): bool
+    {
+        return $this->getCode() === null;
+    }
 }

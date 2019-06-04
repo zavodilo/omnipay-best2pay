@@ -8,11 +8,11 @@ namespace Omnipay\Best2Pay\Message;
  */
 class AuthorizeResponse extends PurchaseResponse
 {
-		/**
-		 * @inheritdoc
-		 */
-		public function getRedirectUrl(): ?string
-		{
-				return $this->getRequest()->getEndPoint() . 'Authorize';
-		}
+    /**
+     * @inheritdoc
+     */
+    public function getRedirectUrl(): ?string
+    {
+        return $this->getRequest()->getEndPoint() . 'Authorize';
+    }
 }
