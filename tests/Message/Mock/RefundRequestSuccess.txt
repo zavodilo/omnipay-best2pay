@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Sun, 12 Dec 2017 22:29:41 GMT
+Content-Type: text/plain;charset=UTF-8
+Connection: keep-alive
+Cache-Control: no-cache, no-store
+
+<?xml version="1.0" encoding="UTF-8"?><operation>
+<order_id>487016</order_id>
+<order_state>CANCELED</order_state>
+<reference>500</reference>
+<id>359999</id>
+<date>2019.06.04 18:15:28</date>
+<type>REVERSE</type>
+<state>APPROVED</state>
+<reason_code>1</reason_code>
+<message>Successful financial transaction</message>
+<pan>520920******6906</pan>
+<amount>200</amount>
+<currency>643</currency>
+<signature>NmExYzFlZjA2MjYzZTc5MTRhYzZmZmJiMmE5MTY0MDg=</signature>
+</operation>
+
