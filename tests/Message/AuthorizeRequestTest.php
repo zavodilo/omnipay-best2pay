@@ -6,13 +6,14 @@ use Omnipay\Best2Pay\Message\AuthorizeRequest;
 use Omnipay\Best2Pay\Message\AuthorizeResponse;
 use Omnipay\Common\Message\RequestInterface;
 
+require_once __DIR__ . '/PurchaseRequestTest.php';
+
 /**
  * Class AuthorizeRequestTest
  * @package Omnipay\Best2Pay\tests\Message\Mock
  */
 class AuthorizeRequestTest extends PurchaseRequestTest
 {
-
     /**
      * @return AuthorizeRequest
      */
