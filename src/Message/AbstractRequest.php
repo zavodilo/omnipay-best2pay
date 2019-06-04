@@ -62,7 +62,7 @@ abstract class AbstractRequest extends BaseAbstractRequest
 
     /**
      * @param string $password
-     * @return AbstractRequest
+     * @return $this
      */
     public function setPassword(string $password): self
     {
@@ -96,7 +96,7 @@ abstract class AbstractRequest extends BaseAbstractRequest
 
     /**
      * @param int $value
-     * @return AbstractRequest
+     * @return $this
      */
     public function setSector(int $value): self
     {

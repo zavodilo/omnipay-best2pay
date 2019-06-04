@@ -20,7 +20,6 @@ class PurchaseRequest extends AbstractRequest
             . $this->getCurrencyNumeric()
             . $this->getPassword();
         $signature = $this->buildSignature($signatureString);
-
         $data = [
             'signature' => $signature,
             'sector' => $this->getSector(),
