@@ -33,5 +33,7 @@
     "psr-4": {
       "Omnipay\\Best2Pay\\Tests\\": "tests/"
     }
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
