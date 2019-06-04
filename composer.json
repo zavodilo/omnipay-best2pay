@@ -1,0 +1,39 @@
+{
+  "name": "redkooala/omnipay-best2pay",
+  "description": "Omnipay driver for Best2Pay",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "SanalOchirov",
+      "email": "orangesanfire@gmail.com"
+    }
+  ],
+  "keywords": [
+    "best2pay",
+    "rest",
+    "api",
+    "payment"
+  ],
+  "require": {
+    "php": "^7.1",
+    "omnipay/common": "v3.0.2"
+  },
+  "require-dev": {
+    "omnipay/tests": "^3",
+    "phpunit/phpunit": "^5.7|^6",
+    "squizlabs/php_codesniffer": "3.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\Best2Pay\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Omnipay\\Best2Pay\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
