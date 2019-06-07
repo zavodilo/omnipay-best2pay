@@ -197,7 +197,7 @@ abstract class AbstractRequest extends BaseAbstractRequest
     /**
      * Validate Request parameters
      */
-    public function validate(): void
+    /*public function validate(): void
     {
         foreach (func_get_args() as $key) {
             $value = $this->parameters->get($key);
@@ -205,5 +205,5 @@ abstract class AbstractRequest extends BaseAbstractRequest
                 throw new \DomainException("The $key parameter is required");
             }
         }
-    }
+    }*/
 }
