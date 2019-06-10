@@ -16,10 +16,7 @@ class Response extends AbstractResponse
      */
     public function __construct(RequestInterface $request, $data)
     {
-        $xmlData = simplexml_load_string($data);
-        $jsonData = json_encode($xmlData);
-
-        parent::__construct($request, json_decode($jsonData, true));
+        parent::__construct($request, $data);
     }
 
     /**
