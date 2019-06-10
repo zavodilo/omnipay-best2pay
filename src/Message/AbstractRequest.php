@@ -169,8 +169,10 @@ abstract class AbstractRequest extends BaseAbstractRequest
                 'Class ' . str_replace('Request', 'Response', \get_class($this)) . ' not found'
             );
         }
+        $xmlData = simplexml_load_string($httpResponse->getBody()->getContents());
+        $jsonData = json_encode($xmlData);
 
-        return $reflection->newInstance($this, $httpResponse->getBody()->getContents());
+        return $reflection->newInstance($this, json_decode($jsonData, true));
     }
 
     /**
@@ -192,18 +194,5 @@ abstract class AbstractRequest extends BaseAbstractRequest
             }
         }
         return $data;
-    }
-
-    /**
-     * Validate Request parameters
-     */
-    public function validate(): void
-    {
-        foreach (func_get_args() as $key) {
-            $value = $this->parameters->get($key);
-            if (!isset($value) || empty($value)) {
-                throw new \DomainException("The $key parameter is required");
-            }
-        }
     }
 }

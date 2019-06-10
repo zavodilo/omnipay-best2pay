@@ -42,7 +42,6 @@ class Gateway extends AbstractGateway
     public function getDefaultParameters(): array
     {
         return [
-            'password' => '',
             'testMode' => false,
             'endPoint' => 'https://best2pay.net/webapi/',
         ];
