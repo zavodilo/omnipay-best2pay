@@ -32,7 +32,7 @@ class Response extends AbstractResponse
      */
     public function getCode(): ?int
     {
-        return $this->data['code'] ?? null;
+        return $this->data['code'] ?? 0;
     }
 
     /**
@@ -40,6 +40,6 @@ class Response extends AbstractResponse
      */
     public function isSuccessful(): bool
     {
-        return $this->getCode() === null;
+        return $this->getCode() === 0;
     }
 }
