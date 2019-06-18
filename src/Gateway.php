@@ -43,7 +43,7 @@ class Gateway extends AbstractGateway
     {
         return [
             'testMode' => false,
-            'endPoint' => 'https://best2pay.net/webapi/',
+            'endPoint' => 'https://pay.best2pay.net/webapi/',
         ];
     }
 
@@ -52,7 +52,7 @@ class Gateway extends AbstractGateway
      */
     public function setTestMode($testMode): self
     {
-        $this->setEndPoint($testMode ? 'https://test.best2pay.net/webapi/' : 'https://best2pay.net/webapi/');
+        $this->setEndPoint($testMode ? 'https://test.best2pay.net/webapi/' : 'https://pay.best2pay.net/webapi/');
 
         return $this->setParameter('testMode', $testMode);
     }

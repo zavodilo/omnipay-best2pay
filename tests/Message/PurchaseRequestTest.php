@@ -165,7 +165,7 @@ class PurchaseRequestTest extends AbstractRequestTest
             ],
             $response->getRedirectData()
         );
-        $this->assertNull($response->getCode());
+        $this->assertSame(0, $response->getCode());
         $this->assertNull($response->getMessage());
         $this->assertEquals($response->getOrderId(), 486800);
         $this->assertEquals(
