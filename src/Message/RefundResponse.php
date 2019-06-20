@@ -27,4 +27,9 @@ class RefundResponse extends Response
     {
         return $this->data['id'] ?? null;
     }
+
+    public function isSuccessful(): bool
+    {
+        return parent::isSuccessful() && ((int)$this->data['reason_code'] === 1);
+    }
 }

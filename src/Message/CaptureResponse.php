@@ -27,4 +27,12 @@ class CaptureResponse extends Response
     {
         return $this->data['id'] ?? null;
     }
+
+    /**
+     * @return bool
+     */
+    public function isSuccessful(): bool
+    {
+       return parent::isSuccessful() && ((int)$this->data['reason_code'] === 1);
+    }
 }
