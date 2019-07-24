@@ -29,6 +29,7 @@ class PurchaseRequest extends AbstractRequest
             'description' => $this->getDescription(),
             'url' => $this->getReturnUrl(),
             'failUrl' => $this->getCancelUrl(),
+            'get_token' => (int) $this->getGetToken(),
         ];
 
         $additionalParams = [
@@ -96,6 +97,23 @@ class PurchaseRequest extends AbstractRequest
     public function getEmail(): ?string
     {
         return $this->getParameter('email');
+    }
+
+    /**
+     * @param bool $value
+     * @return \Omnipay\Best2Pay\Message\PurchaseRequest
+     */
+    public function setGetToken(bool  $value): self
+    {
+        return $this->setParameter('get_token', $value);
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getGetToken(): ?bool
+    {
+        return $this->getParameter('get_token');
     }
 
     /**
