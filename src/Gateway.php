@@ -33,7 +33,7 @@ class Gateway extends AbstractGateway
      */
     public function getShortName(): string
     {
-        return 'Best2Pay';
+        return 'best2Pay';
     }
 
     /**
