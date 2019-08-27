@@ -2,8 +2,14 @@
 
 namespace Omnipay\Best2Pay\Message;
 
+use Money\Currency;
+use Money\Formatter\DecimalMoneyFormatter;
+use Money\Number;
+use Money\Parser\DecimalMoneyParser;
+
 /**
  * Class AuthorizeRequest
+ *
  * @package Omnipay\Best2Pay\Message
  */
 class PurchaseRequest extends AbstractRequest
@@ -32,6 +38,10 @@ class PurchaseRequest extends AbstractRequest
             'get_token' => (int) $this->getGetToken(),
         ];
 
+        if ($amount2 = $this->getAmount2()) {
+            $data['amount2'] = (int) $this->createMoney($this->getParameter('amount2'))->getAmount();;
+        }
+
         $additionalParams = [
             'email',
             'phone',
@@ -51,7 +61,7 @@ class PurchaseRequest extends AbstractRequest
             'start_date',
             'end_date',
             'receipt_type',
-            'lang'
+            'lang',
         ];
 
         return $this->specifyAdditionalParameters($data, $additionalParams);
@@ -63,6 +73,78 @@ class PurchaseRequest extends AbstractRequest
     public function getAction(): string
     {
         return 'Register';
+    }
+
+    /**
+     * Money object.
+     * @return string
+     * @throws \Omnipay\Common\Exception\InvalidRequestException
+     */
+    public function createMoney($amount = null)
+    {
+        $currencyCode = $this->getCurrency() ?: 'USD';
+        $currency = new Currency($currencyCode);
+
+        if ($amount === null) {
+            return null;
+        } elseif ($amount instanceof Money) {
+            $money = $amount;
+        } elseif (is_integer($amount)) {
+            $money = new Money($amount, $currency);
+        } else {
+            $moneyParser = new DecimalMoneyParser($this->getCurrencies());
+
+            $number = Number::fromString($amount);
+
+            // Check for rounding that may occur if too many significant decimal digits are supplied.
+            $decimal_count = strlen($number->getFractionalPart());
+            $subunit = $this->getCurrencies()->subunitFor($currency);
+            if ($decimal_count > $subunit) {
+                throw new InvalidRequestException('Amount precision is too high for currency.');
+            }
+
+            $money = $moneyParser->parse((string) $number, $currency);
+        }
+
+        // Check for a negative amount.
+        if (!$this->negativeAmountAllowed && $money->isNegative()) {
+            throw new InvalidRequestException('A negative amount is not allowed.');
+        }
+
+        // Check for a zero amount.
+        if (!$this->zeroAmountAllowed && $money->isZero()) {
+            throw new InvalidRequestException('A zero amount is not allowed.');
+        }
+
+        return $money;
+    }
+
+    /**
+     * Amount2 (displayed gateay amount)
+     *
+     * @param $amount
+     * @return mixed
+     * @throws \Omnipay\Common\Exception\InvalidRequestException
+     */
+    public function getAmount2()
+    {
+        $money = $this->createMoney($this->getParameter('amount2'));
+
+        if ($money !== null) {
+            $moneyFormatter = new DecimalMoneyFormatter($this->getCurrencies());
+
+            return $moneyFormatter->format($money);
+        }
+    }
+
+    /**
+     * Amount2.
+     * @param $value
+     * @return \Omnipay\Best2Pay\Message\PurchaseRequest
+     */
+    public function setAmount2($value): self
+    {
+        return $this->setParameter('amount2', $value !== null ? (string) $value : null);
     }
 
     /**
