@@ -139,6 +139,12 @@ class PurchaseRequestTest extends AbstractRequestTest
         $this->assertEquals($data['currency'], 643);
         $this->assertEquals($data['description'], $description);
         $this->assertEquals($data['email'], $email);
+        $this->assertArrayNotHasKey('amount2', $data);
+
+        // check amount2
+        $this->request->setAmount2(100);
+        $data = $this->request->getData();
+        $this->assertEquals(10000, $data['amount2']);
     }
 
     /**
