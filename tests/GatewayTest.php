@@ -2,6 +2,8 @@
 
 namespace Omnipay\Best2Pay\Tests;
 
+use Omnipay\Best2Pay\Message\GooglePayRequest;
+use Omnipay\Best2Pay\Message\MakeApplePayRequest;
 use Omnipay\Best2Pay\Message\RefundRequest;
 use Omnipay\Best2Pay\Gateway;
 use Omnipay\Best2Pay\Message\PurchaseRequest;
@@ -78,5 +80,19 @@ class GatewayTest extends GatewayTestCase
         $this->assertTrue($this->gateway->supportsOrderStatus());
         $this->assertTrue(method_exists($this->gateway, 'orderStatus'));
         $this->assertInstanceOf(OrderStatusRequest::class, $this->gateway->orderStatus());
+    }
+
+    public function testApplePay(): void
+    {
+        $this->assertTrue($this->gateway->supportMakeApplePay());
+        $this->assertTrue(method_exists($this->gateway, 'makeApplePay'));
+        $this->assertInstanceOf(MakeApplePayRequest::class, $this->gateway->makeApplePay());
+    }
+
+    public function testGooglePay(): void
+    {
+        $this->assertTrue($this->gateway->supportGooglePay());
+        $this->assertTrue(method_exists($this->gateway, 'makeGooglePay'));
+        $this->assertInstanceOf(GooglePayRequest::class, $this->gateway->makeGooglePay());
     }
 }
