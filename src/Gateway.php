@@ -3,6 +3,8 @@
 namespace Omnipay\Best2Pay;
 
 use Omnipay\Best2Pay\Message\AuthorizeRequest;
+use Omnipay\Best2Pay\Message\GooglePayRequest;
+use Omnipay\Best2Pay\Message\MakeApplePayRequest;
 use Omnipay\Best2Pay\Message\PurchaseRequest;
 use Omnipay\Best2Pay\Message\CaptureRequest;
 use Omnipay\Best2Pay\Message\OrderStatusRequest;
@@ -205,6 +207,22 @@ class Gateway extends AbstractGateway
     }
 
     /**
+     * @return bool
+     */
+    public function supportMakeApplePay(): bool
+    {
+        return method_exists($this, 'makeApplePay');
+    }
+
+    /**
+     * @return bool
+     */
+    public function supportGooglePay(): bool
+    {
+        return method_exists($this, 'makeGooglePay');
+    }
+
+    /**
      * Order status request
      *
      * @param array $options
@@ -213,6 +231,17 @@ class Gateway extends AbstractGateway
     public function completeAuthorize(array $options = []): RequestInterface
     {
         return $this->createRequest(OrderStatusRequest::class, $options);
+    }
+
+    public function makeApplePay(array $options = []): RequestInterface
+    {
+        return $this->createRequest(MakeApplePayRequest::class, $options);
+    }
+
+
+    public function makeGooglePay(array $options = []): RequestInterface
+    {
+        return $this->createRequest(GooglePayRequest::class, $options);
     }
 
 
