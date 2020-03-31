@@ -32,4 +32,23 @@ class RefundResponse extends Response
     {
         return parent::isSuccessful() && ((int)$this->data['reason_code'] === 1);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessage(): ?string
+    {
+        if ($this->isSuccessful()) {
+            return null;
+        }
+        $message = '';
+        if (isset($this->data['description'])) {
+            return $this->data['description'];
+        }
+        if (isset($this->data['message'])) {
+            return $this->data['message'];
+        }
+
+        return $message;
+    }
 }
