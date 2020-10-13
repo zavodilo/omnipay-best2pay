@@ -176,6 +176,11 @@ class Gateway extends AbstractGateway
         return $this->createRequest(CaptureRequest::class, $options);
     }
 
+    public function captureSafe(array $options = []): RequestInterface
+    {
+        return $this->createRequest(CaptureSafeRequest::class, $options);
+    }
+
     /**
      * Refund order request
      *
