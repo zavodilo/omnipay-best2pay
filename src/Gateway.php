@@ -3,12 +3,16 @@
 namespace Omnipay\Best2Pay;
 
 use Omnipay\Best2Pay\Message\AuthorizeRequest;
+use Omnipay\Best2Pay\Message\CaptureSafeRequest;
+use Omnipay\Best2Pay\Message\DebitSafeRequest;
+use Omnipay\Best2Pay\Message\ExtraPaymentSafeRequest;
 use Omnipay\Best2Pay\Message\GooglePayRequest;
 use Omnipay\Best2Pay\Message\MakeApplePayRequest;
 use Omnipay\Best2Pay\Message\PurchaseRequest;
 use Omnipay\Best2Pay\Message\CaptureRequest;
 use Omnipay\Best2Pay\Message\OrderStatusRequest;
 use Omnipay\Best2Pay\Message\RefundRequest;
+use Omnipay\Best2Pay\Message\RefundSafeRequest;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Common\Message\RequestInterface;
 
@@ -176,9 +180,44 @@ class Gateway extends AbstractGateway
         return $this->createRequest(CaptureRequest::class, $options);
     }
 
+    /**
+     * Оплата с карты по безопастной сделке
+     * @param array $options
+     * @return RequestInterface
+     */
     public function captureSafe(array $options = []): RequestInterface
     {
         return $this->createRequest(CaptureSafeRequest::class, $options);
+    }
+
+    /**
+     * Холдирование средств по безопастной сделке
+     * @param array $options
+     * @return RequestInterface
+     */
+    public function debitSafe(array $options = []): RequestInterface
+    {
+        return $this->createRequest(DebitSafeRequest::class, $options);
+    }
+
+    /**
+     * Возврат захолдированных средств
+     * @param array $options
+     * @return RequestInterface
+     */
+    public function refundSafe(array $options = []): RequestInterface
+    {
+        return $this->createRequest(RefundSafeRequest::class, $options);
+    }
+
+    /**
+     * Запрос для списания средств дилеру
+     * @param array $options
+     * @return RequestInterface
+     */
+    public function extraPaymentSafe(array $options = []): RequestInterface
+    {
+        return $this->createRequest(ExtraPaymentSafeRequest::class, $options);
     }
 
     /**
