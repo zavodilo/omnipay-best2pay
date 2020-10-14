@@ -3,6 +3,7 @@
 namespace Omnipay\Best2Pay;
 
 use Omnipay\Best2Pay\Message\AuthorizeRequest;
+use Omnipay\Best2Pay\Message\AuthorizeSafeRequest;
 use Omnipay\Best2Pay\Message\CaptureSafeRequest;
 use Omnipay\Best2Pay\Message\DebitSafeRequest;
 use Omnipay\Best2Pay\Message\ExtraPaymentSafeRequest;
@@ -191,13 +192,13 @@ class Gateway extends AbstractGateway
     }
 
     /**
-     * Холдирование средств по безопастной сделке
+     * Создание заказа по безопастной сделке
      * @param array $options
      * @return RequestInterface
      */
-    public function debitSafe(array $options = []): RequestInterface
+    public function authorizeSafe(array $options = []): RequestInterface
     {
-        return $this->createRequest(DebitSafeRequest::class, $options);
+        return $this->createRequest(AuthorizeSafeRequest::class, $options);
     }
 
     /**
